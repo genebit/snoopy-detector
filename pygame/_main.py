@@ -7,6 +7,12 @@ clock = pygame.time.Clock()
 
 fake_window = pygame.image.load('./pygame/img/windows.PNG')
 
+# FIXME: Font not initialized
+font = pygame.font.SysFont('Roboto', 32)
+clock =  font.render('10', True, (255, 255, 255))
+clock_rect = clock.get_rect()
+clock_rect.center = (window.get_width()/2, window.get_height()/2 -20)
+
 while True:
 
     for event in pygame.event.get():
