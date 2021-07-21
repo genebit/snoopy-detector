@@ -1,6 +1,6 @@
 import datetime
 
-class GetDate:
+class Date:
 
     _month = None
     _day = None
@@ -50,18 +50,48 @@ class GetDate:
         day = None
 
         if raw_weekday == 0:
-            day = 'Monday'
+            day = 'Mon'
         if raw_weekday == 1:
-            day = 'Tuesday'
+            day = 'Tue'
         if raw_weekday == 2:
-            day = 'Wednesday'
+            day = 'Wed'
         if raw_weekday == 3:
-            day = 'Thursday'
+            day = 'Thu'
         if raw_weekday == 4:
-            day = 'Friday'
+            day = 'Fri'
         if raw_weekday == 5:
-            day = 'Saturday'
+            day = 'Sat'
         if raw_weekday == 6:
-            day = 'Sunday'
+            day = 'Sun'
 
         return day
+
+class Time:
+
+    _hour = None
+    _minute = None
+
+    current_hour = None
+    current_daytime = None
+    current_time = None
+
+    def __init__(self):
+        self._hour = datetime.datetime.now().hour
+        self._minute = datetime.datetime.now().minute
+
+        self.current_hour = self.convert_hour(self._hour)
+        self.current_daytime = self.determine_daytime(self._hour)
+        
+        self.current_time = '{0}:{1} {2}'.format(self.current_hour, self._minute, self.current_daytime)
+    
+    def convert_hour(self, hour):
+        format = hour % 12
+        format = 12 if format == 0 else format
+        
+        return format
+
+    def determine_daytime(self, hour):
+        daytime = None
+        daytime = 'AM' if hour < 12 else 'PM'
+
+        return daytime
